@@ -1,12 +1,6 @@
 
 package src;
-import java.util.Iterator;
- 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
-import org.json.simple.parser.JSONParser;
- 
+import java.util.ArrayList;
 import java.util.Iterator;
  
 import org.json.simple.JSONArray;
@@ -17,75 +11,57 @@ import org.json.simple.parser.JSONParser;
 public class Main {
 	public static void main(String[] args) {
  
-		String key_path = "~/eclipse-workspace/my-project/api_key.txt"; 							//Path to API Key (api_key.txt)
 		String key = "";
 		String path_code = "/2/open_events";								//PathCode for get-events
 																			//More PathCodes : http://www.meetup.com/meetup_api/docs/
 		String events = "";
  
 		EventGetter eventGetter = new EventGetter();
-		key = "a22572e5c3b65611273533a12321fb";//eventGetter.getApiKey(key_path);
+		key = eventGetter.getApiKey();
  
-		/*
-		 * 1-PARAMETER EXAMPLE :
-		 */ 
-		eventGetter.topic = "photo";										//Set the parameter "topic" to "photo"
- 
-		try {
-			events = eventGetter.getEvent(path_code, key);					//Store the event response into a String
-		} catch (Exception e) {e.printStackTrace();}
-		DecodeJSON(events);													//Print JSON-parsed events info						
- 
-		/*
-		 * 2-PARAMETER EXAMPLE :
-		 */
-		eventGetter.topic = "tech";											//Set parameters
-		eventGetter.city = "Barcelona";										
+		
+		eventGetter.topic = "tech,photo,art";											//Set parameters
+		eventGetter.city = "San Francisco";	
+		eventGetter.radius = "25.0";
 		try{
 			events = eventGetter.getEvent(path_code, key);
 		}catch(Exception e){e.printStackTrace();}
-		//System.out.println(events);											//Print the events list (JSON)
+		
+		ArrayList<Event> eventsList = DecodeJSON(events);	
+		System.out.println(eventsList.size());
  
- 
-		/*
-		 * MULTIPLE-TOPICS EXAMPLE :
-		 * Separate topics by commas
-		 */
-		eventGetter.topic = "tech,photo,art";								//multiple topic separated by commas										
-		eventGetter.city = "Barcelona";
-		try{
-			events = eventGetter.getEvent(path_code, key);
-		}catch(Exception e){e.printStackTrace();}
  
 	}
  
-	public static void DecodeJSON(String events){
- 
+	public static ArrayList <Event> DecodeJSON(String events){
+		ArrayList <Event> eventsList = new ArrayList<Event>();
 		try{
 			JSONParser parser = new JSONParser();
 			JSONObject obj = (JSONObject) parser.parse(events);
 			JSONArray results = (JSONArray) obj.get("results");
+			JSONObject meta = (JSONObject) obj.get("meta");
+			System.out.println(meta.get("total_count"));
 			System.out.println("Results : ");
- 
+			int count = 0;
 			Iterator i = results.iterator(); 
 			while(i.hasNext()){
 				JSONObject event = (JSONObject) i.next();
-				System.out.println("Name : "+event.get("name"));
- 
-				if(event.containsKey("venue")){
-					JSONObject venue = (JSONObject) event.get("venue");
-					System.out.println("Location (city) : "+venue.get("city"));
-					System.out.println("Location (adress) : "+venue.get("adress_1"));
+				Event meetupEvent = new Event(event);
+				if(meetupEvent.hasGeoCoordiates() && meetupEvent.yes_rsvp_count>10) {
+					count++;
+					eventsList.add(meetupEvent);
+					System.out.println(String.format("Event %2d: %s",count,meetupEvent.name) );
+					meetupEvent.printLocation();
 				}
- 
- 
-				System.out.println("Url : "+event.get("event_url"));
-				System.out.println("Time : "+event.get("time"));
-				//i.next();
 			}
- 
 		}
 		catch(Exception e){e.printStackTrace();}
+		return eventsList;
+	}
+	
+	public static boolean Save2File(String filename) {
+		return true;
+	
 	}
  
 }

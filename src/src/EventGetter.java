@@ -18,7 +18,8 @@ public class EventGetter {
  
 	String city = "";
 	public String topic = "";
-	
+	String radius = "25.0";
+	String order = "distance";
  
 	public String getEvent(String path_code,String key) throws Exception{
 		String responseString = "";
@@ -30,6 +31,8 @@ public class EventGetter {
 			//List of parameters :
 			.setParameter("topic", topic)
 			.setParameter("city", city)
+			.setParameter("radius", radius)
+			//.setParameter("order", order)
 			//End of params
 			.setParameter("key", key)
 			.build();
@@ -40,21 +43,14 @@ public class EventGetter {
 		CloseableHttpClient client = HttpClients.createDefault();
 		CloseableHttpResponse response = client.execute(get);
 		responseString = EntityUtils.toString(response.getEntity());
- 
+
 		return responseString;
 	}
  
-	public String getApiKey(String key_path){
-		String key = "";
- 
-		try{
-			BufferedReader reader = new BufferedReader(new FileReader(key_path));	//Read the file where the API Key is
-			key = reader.readLine().toString();									//Store key
-			reader.close();
-		}
-		catch(Exception e){System.out.println(e.toString());}
- 
+	public String getApiKey(){
+		String key = "a22572e5c3b65611273533a12321fb";
 		return key;																//Return the key value.
 	}
+	
  
 }
