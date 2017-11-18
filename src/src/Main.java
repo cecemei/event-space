@@ -14,9 +14,19 @@ public class Main {
 		String key = "";
 		String path_code = "/2/open_events";								//PathCode for get-events
 																			//More PathCodes : http://www.meetup.com/meetup_api/docs/
-		String events = "";
+		ArrayList<Event> events;
+
+		APIRequest eventGetter = new APIRequest();
+		eventGetter.topic = "tech,photo,art";											//Set parameters
+		eventGetter.city = "San Francisco";	
+		eventGetter.radius = "25.0";
+		try{
+			events = eventGetter.getEvent(path_code);
+			System.out.println(events.size());
+		}catch(Exception e){e.printStackTrace();}
+		
  
-		EventGetter eventGetter = new EventGetter();
+		/*EventGetter eventGetter = new EventGetter();
 		key = eventGetter.getApiKey();
  
 		
@@ -26,14 +36,15 @@ public class Main {
 		try{
 			events = eventGetter.getEvent(path_code, key);
 		}catch(Exception e){e.printStackTrace();}
-		
-		ArrayList<Event> eventsList = DecodeJSON(events);	
-		System.out.println(eventsList.size());
- 
+		*/
+		//ArrayList<Event> eventsList = DecodeJSON(events);	
+		//System.out.println(eventsList.size());
+		//GoogleMapView M = new GoogleMapView();
+		//M.ShowMap();
  
 	}
  
-	public static ArrayList <Event> DecodeJSON(String events){
+	/*public static ArrayList <Event> DecodeJSON(String events){
 		ArrayList <Event> eventsList = new ArrayList<Event>();
 		try{
 			JSONParser parser = new JSONParser();
@@ -57,7 +68,7 @@ public class Main {
 		}
 		catch(Exception e){e.printStackTrace();}
 		return eventsList;
-	}
+	}*/
 	
 	public static boolean Save2File(String filename) {
 		return true;

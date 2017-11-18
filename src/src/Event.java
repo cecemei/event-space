@@ -25,13 +25,13 @@ public class Event {
 			try {
 				city = (String) venue.get("city");
 				address = (String) venue.get("address_1");
-				lat = (double) venue.get("lat");
-				lon = (double) venue.get("lon");}
+				lat = (Double) venue.get("lat");
+				lon = (Double) venue.get("lon");}
 			catch(Exception e){/*System.out.println("check venue format"+venue);*/}
 		}
 		url = (String) event.get("event_url");
-		time = (long) event.get("time");
-		yes_rsvp_count = (long)event.get("yes_rsvp_count");
+		time = (Long) event.get("time");
+		yes_rsvp_count = (Long)event.get("yes_rsvp_count");
 	}
 	
 	public void printLocation() {
