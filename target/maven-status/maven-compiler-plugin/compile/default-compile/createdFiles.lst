@@ -1,5 +1,7 @@
+src/MeetupAPIRequest.class
 src/Main.class
-src/EventGetter.class
-src/APIRequest.class
+src/City.class
+src/Topic.class
+src/User.class
 src/Event.class
-src/GoogleMapView.class
+src/Model.class

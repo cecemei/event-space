@@ -1,0 +1,17 @@
+Yingqians-MacBook-Air:meet-up-open-events cece$ java -jar target/meet-up-open-events-0.0.1-SNAPSHOT.jar 
+Get request : GET http://api.meetup.com/2/topic_categories?page=40&key=6d75526a39297e167b781f4c3c6b3c HTTP/1.1
+Total topics: 24
+Get request : GET http://api.meetup.com/2/cities?page=40&key=6d75526a39297e167b781f4c3c6b3c HTTP/1.1
+Total cities: 40
+Enter your name: cece
+Enter your city: 0-San Francisco  1-San Jose  2-Oakland  3-Palo Alto  4-Berkeley  5-Mountain View  6-Santa Cruz  7-Sunnyvale  8-Walnut Creek  9-Fremont  10-San Mateo  11-Santa Clara  12-San Rafael  13-Stockton  14-San Carlos  15-Redwood City  16-Concord  17-Alameda  18-Cupertino  19-Campbell  20-Hayward  21-San Ramon  22-Salinas  23-Menlo Park  24-Los Gatos  25-Pleasanton  26-Dublin  27-Los Altos  28-Livermore  29-Milpitas  30-Danville  31-Mill Valley  32-Burlingame  33-San Leandro  34-Emeryville  35-Tracy  36-Castro Valley  37-Belmont  38-Pleasant Hill  39-Martinez  
+0
+Choose the topic: 0-Arts  1-Beliefs  2-Book Clubs  3-Career & Business  4-Dance  5-Learning  6-Fashion & Beauty  7-Film  8-Food & Drink  9-Sci-Fi & Games  10-Health & Wellness  11-Hobbies & Crafts  12-Language & Culture  13-LGBTQ  14-Movements  15-Music  16-Outdoors & Adventure  17-Family  18-Pets  19-Photography  20-Social  21-Sports & Fitness  22-Tech  23-Writing  
+2
+Get request : GET http://api.meetup.com/2/open_events?topic=literature&city=San+Francisco&state=CA&country=us&page=200&key=6d75526a39297e167b781f4c3c6b3c&time=%2C1w HTTP/1.1
+4 suggested events nearby: 
+	Books 8 through 11 of Ovid's Metamorphoses., time:Sunday,November 19,2017 7:00,AM, location: 6810 Eureka Ave , El Cerrito, CA, USA
+	Ghachar Ghochar by Vivek Shanbhag, time:Monday,November 20,2017 11:00,AM, location:  870 Valencia Street, San Francisco, CA, USA
+	Book, Coffee, Chit Chat, etc. (Wednesday Edition), time:Wednesday,November 22,2017 11:00,AM, location: 748 Van  Ness Avenue, San Francisco, CA, USA
+	San Francisco Theme: Poetry of Sound, time:Saturday,November 25,2017 6:00,AM, location: 548 Fillmore St, San Francisco, CA 94117, San Francisco, CA, USA
+	
