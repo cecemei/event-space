@@ -1,0 +1,18 @@
+Nov 26, 2017 1:58:19 PM src.MeetupAPIRequest gettopics
+INFO: Get request : GET http://api.meetup.com/2/topic_categories?page=40&key=6d75526a39297e167b781f4c3c6b3c HTTP/1.1
+Nov 26, 2017 1:58:19 PM src.MeetupAPIRequest gettopics
+INFO: Response : HttpResponseProxy{HTTP/1.1 200 OK [Content-Type: application/json;charset=utf-8, Server: Apache-Coyote/1.1, X-Meetup-server: 402e0f450867, X-Meetup-Request-ID: be9a8ce2-3423-4451-90f5-23afc4544953, X-RateLimit-Limit: 30, X-RateLimit-Remaining: 29, X-RateLimit-Reset: 10, X-OAuth-Scopes: basic, X-Accepted-OAuth-Scopes: basic, ETag: "e41236a484f01ee018853b8eccab2372-gzip", Accept-Ranges: bytes, Date: Sun, 26 Nov 2017 21:58:19 GMT, Via: 1.1 varnish, Connection: keep-alive, X-Served-By: cache-bur17528-BUR, X-Cache: MISS, X-Cache-Hits: 0, X-Timer: S1511733499.331144,VS0,VE102, Vary: Accept-Encoding,User-Agent,Accept-Language] org.apache.http.client.entity.GzipDecompressingEntity@5fe8b721}
+Nov 26, 2017 1:58:19 PM src.Data <init>
+INFO: Total topics: 24
+
+Nov 26, 2017 1:58:19 PM src.MeetupAPIRequest getcities
+INFO: Get request : GET http://api.meetup.com/2/cities?page=200&key=6d75526a39297e167b781f4c3c6b3c HTTP/1.1
+Nov 26, 2017 1:58:19 PM src.MeetupAPIRequest getcities
+INFO: Response : HttpResponseProxy{HTTP/1.1 200 OK [Content-Type: application/json;charset=utf-8, Server: Apache-Coyote/1.1, X-Meetup-server: 6674a7ed0874, X-Meetup-Request-ID: c18fc1c5-119f-4137-b35c-6a352bb19ba5, X-RateLimit-Limit: 30, X-RateLimit-Remaining: 28, X-RateLimit-Reset: 10, X-OAuth-Scopes: basic, X-Accepted-OAuth-Scopes: basic, ETag: "d569aa96d25abbd741fd59f3625d0d3a-gzip", Accept-Ranges: bytes, Date: Sun, 26 Nov 2017 21:58:19 GMT, Via: 1.1 varnish, Connection: keep-alive, X-Served-By: cache-bur17535-BUR, X-Cache: MISS, X-Cache-Hits: 0, X-Timer: S1511733500.538774,VS0,VE115, Vary: Accept-Encoding,User-Agent,Accept-Language] org.apache.http.client.entity.GzipDecompressingEntity@780ec4a5}
+Nov 26, 2017 1:58:19 PM src.Data <init>
+INFO: Total cities: 171
+
+Nov 26, 2017 2:00:15 PM src.MeetupAPIRequest getEvent
+INFO: Get request : GET http://api.meetup.com/2/open_events?topic=spirituality&city=Walnut+Creek&state=CA&country=us&page=200&key=6d75526a39297e167b781f4c3c6b3c&time=%2C1w HTTP/1.1
+Nov 26, 2017 2:00:15 PM src.MeetupAPIRequest getEvent
+INFO: Response : HttpResponseProxy{HTTP/1.1 200 OK [Content-Type: application/json;charset=utf-8, Server: Apache-Coyote/1.1, X-Meetup-server: 6942f0e591ea, X-Meetup-Request-ID: 0ee75586-76ba-4989-b36b-5ca47c61ebf3, X-RateLimit-Limit: 30, X-RateLimit-Remaining: 29, X-RateLimit-Reset: 10, X-OAuth-Scopes: basic, X-Accepted-OAuth-Scopes: basic, ETag: "b4b12617ae681f0be231832b8f9bd8f9-gzip", Accept-Ranges: bytes, Date: Sun, 26 Nov 2017 22:00:15 GMT, Via: 1.1 varnish, Connection: keep-alive, X-Served-By: cache-bur17526-BUR, X-Cache: MISS, X-Cache-Hits: 0, X-Timer: S1511733615.025180,VS0,VE326, Vary: Accept-Encoding,User-Agent,Accept-Language] org.apache.http.client.entity.GzipDecompressingEntity@303e40af}

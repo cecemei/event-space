@@ -1,0 +1,15 @@
+package src;
+
+@Configuration
+public class TheResourceHandler extends WebMvcConfigurerAdapter {
+/*
+Configuration. Redirect. 
+*/
+	@Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        
+        registry.addRedirectViewController("/home", "/home.html");
+        
+    }
+
+}

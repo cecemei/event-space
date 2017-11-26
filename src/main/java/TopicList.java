@@ -6,7 +6,7 @@ import java.util.Iterator;
 
 import org.json.simple.JSONObject;
 
-public class Topic{
+class Topic{
 
 	String name;
 	String urlkey;
@@ -21,4 +21,12 @@ public class Topic{
 		urlkey = (String) ((JSONObject)topicjson.get("topic")).get("urlkey");
 
 	}
+}
+
+
+public class TopicList{
+        ArrayList<Topic> topics;
+        void setList(ArrayList<Topic> theTopics){
+            this.topics = theTopics;
+        }
 }

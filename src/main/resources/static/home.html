@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Event Space</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!--Include firebase.js  -->
+        <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+       
+        <script>
+          // Initialize Firebase
+          const config = {
+            apiKey: "AIzaSyDf1DxRbzsb_2hK32wZU7ldKeswVSCvHX8",
+            authDomain: "city-event-c71a7.firebaseapp.com",
+            databaseURL: "https://city-event-c71a7.firebaseio.com",
+            projectId: "city-event-c71a7",
+            storageBucket: "city-event-c71a7.appspot.com",
+            messagingSenderId: "823124493746"
+          };
+          firebase.initializeApp(config);
+        </script>
+
+        <script src="CityEvent.js"></script>
+        <link rel="stylesheet" type="text/css" href="./style.css">
+    </head>
+    <body>
+        <div class="page">
+            <div class="navigation">
+                
+                    <div class="actions"><button type="button" id="register">Log In</button>
+                                         <button type="button" id="signOut">Sign Out</button>
+                    </div>
+            </div>
+
+            <div class="body">
+
+                  <div class="optionsbox">
+                    <form action="" >
+                      <dl>
+                        
+                          <dt>Where is your city: 
+                          <dd><input list="citycollection" name="myCity" id="selectedcity">
+                          <datalist id="citycollection"></datalist> <br><br>
+                     
+                          <dt>What topic are you interested in: 
+                          <dd><input list="topiccollection" name="myTopic" id="selectedtopic"></label>
+                          <datalist id="topiccollection"></datalist> 
+                      </dl>
+                      <div class="actions"><input type="button" value="Query Event" id="queryevent"></div>
+                    </form>
+                     
+                  </div>
+
+                  <ul class="messages" id="eventcollection">
+                    
+                   
+                  </ul>
+            </div>
+            <div class="footer">
+                Event Space &mdash; Query events by city+topic. Stack &mdash; Spring+Restful+jQuery 
+            </div>
+        </div>
+        <script>
+                $(document).ready(function() {
+                    window.model = new CityEvent();
+
+                    model.getCities = function(theCities){
+                      $.ajax({
+                          url: "/cities"
+                      }).then(function(data) {
+                          const cities = JSON.parse(data).cities;
+                          //let options = '';
+                          for(let i=0; i<cities.length; i++){
+                            let option = document.createElement('option');
+                            option.value = cities[i].city;   
+                            document.getElementById('citycollection').appendChild(option);
+                              
+                             
+                          }
+                         
+                         window.cities=cities;
+                      });
+                
+
+                    };
+
+                    model.getTopics = function(theTopics){
+                      $.ajax({
+                          url: "/topics"
+                      }).then(function(data) {
+                          const topics = JSON.parse(data).topics;
+                        
+                          for(let i=0; i<topics.length; i++){
+                            let option = document.createElement('option');
+                            option.value = topics[i].name;   
+                            document.getElementById('topiccollection').appendChild(option);
+                            
+                             
+                          }
+                         window.topics=topics;
+                      });
+                
+
+                    };
+
+                    if(!window.cities){
+                        model.getCities();
+                    }
+                    if(!window.topics){
+                        model.getTopics();
+                    }
+                    
+                    
+                    model.signInButton=document.getElementById("register");
+                    model.signOutButton=document.getElementById("signOut");
+                    
+                    model.signInButton.addEventListener('click', function(){
+                        let signInStatus = model.signIn();
+                        alert("welcome "+model.auth.currentUser.displayName);
+                        
+                    });
+                    model.signOutButton.addEventListener('click', model.signOut.bind(model));
+
+
+                    model.eventQueryButton=document.getElementById("queryevent");
+                    model.eventQueryButton.addEventListener('click', function(){
+                        model.eventQueryButton.setAttribute('disabled', 'disabled'); 
+
+
+                        let city_i = -1;
+                        let topic_i = -1;
+                        for(let i=0; i<cities.length; i++){
+                            if(cities[i].city==document.getElementById('selectedcity').value){
+                                city_i = i;
+                                break;
+                            }
+
+                        }
+                        for(let i=0; i<topics.length; i++){
+                            if(topics[i].name==document.getElementById('selectedtopic').value){
+                                topic_i = i;
+                                break;
+                            }
+
+                        }
+
+                        if(city_i>=0 && topic_i>=0){
+
+
+                              $.ajax({
+                                url: "/events",
+                                data: {"city_i": city_i, "topic_i": topic_i}
+                              }).then(function(data) {
+                                window.data=data;
+                                  const events = JSON.parse(data).events;
+                                
+                                  for(let i=0; i<events.length; i++){
+                                   
+                                    let li = '<li><strong>'+events[i].name+'</strong><br>'+
+                                      events[i].address + '<br><em> '+events[i].formattedDate + '</em><br>'+ 
+                                      'RSVP: ' +events[i].yes_rsvp_count   +
+                                      '<a href="'+events[i].url+'">link to event page</a>' + 
+                                      '<small>'+events[i].description+'</small>'+'</li>';
+                            
+                                    $('#eventcollection').append(li);
+                                    
+                                  }
+                                 
+                                 window.events=events;
+                                 model.eventQueryButton.removeAttribute("disabled");
+                              });
+                        } else {
+                            alert('invalid city or topic value');
+                        }
+
+
+                    })
+
+
+
+                });
+
+        </script>
+    </body>
+</html>

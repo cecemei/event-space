@@ -1,7 +1,13 @@
+src/CityList.class
+src/TheResourceHandler.class
+src/TheRestController.class
+src/EventList.class
+src/TopicList.class
+src/User.class
+src/Event.class
 src/MeetupAPIRequest.class
 src/Main.class
 src/City.class
+src/TheController.class
 src/Topic.class
-src/User.class
-src/Event.class
-src/Model.class
+src/Data.class
