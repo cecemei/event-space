@@ -25,7 +25,7 @@
     <body>
         <div class="page">
             <div class="navigation">
-                
+                  Welcome, <strong id="username"></strong>
                     <div class="actions"><button type="button" id="register">Log In</button>
                                          <button type="button" id="signOut">Sign Out</button>
                     </div>
@@ -63,6 +63,8 @@
                 $(document).ready(function() {
                     window.model = new CityEvent();
 
+                    window.displayUserNameText = document.getElementById('username');
+                    
                     model.getCities = function(theCities){
                       $.ajax({
                           url: "/cities"
@@ -115,10 +117,30 @@
                     
                     model.signInButton.addEventListener('click', function(){
                         let signInStatus = model.signIn();
-                        alert("welcome "+model.auth.currentUser.displayName);
+                        
                         
                     });
-                    model.signOutButton.addEventListener('click', model.signOut.bind(model));
+                    model.signOutButton.addEventListener('click', function(){
+                        model.signOut();
+                        
+                        
+                    });
+
+
+
+                    model.onAuthStateChanged = function(user){
+                        if(user){
+                            model.signOutButton.removeAttribute('hidden');
+                            model.signInButton.setAttribute('hidden','true');
+                        } else{
+                            model.signOutButton.setAttribute('hidden','true');
+                            model.signInButton.removeAttribute('hidden');
+                        }
+                        window.displayUserNameText.innerHTML = model.checkCurrentUser();
+                        console.log(model.checkCurrentUser());
+
+                    };
+                    model.auth.onAuthStateChanged(model.onAuthStateChanged.bind(model));
 
 
                     model.eventQueryButton=document.getElementById("queryevent");
@@ -150,14 +172,14 @@
                                 url: "/events",
                                 data: {"city_i": city_i, "topic_i": topic_i}
                               }).then(function(data) {
-                                window.data=data;
+                                $('#eventcollection').empty()
                                   const events = JSON.parse(data).events;
                                 
                                   for(let i=0; i<events.length; i++){
                                    
                                     let li = '<li><strong>'+events[i].name+'</strong><br>'+
                                       events[i].address + '<br><em> '+events[i].formattedDate + '</em><br>'+ 
-                                      'RSVP: ' +events[i].yes_rsvp_count   +
+                                      'RSVP: ' +events[i].yes_rsvp_count   + '  '+
                                       '<a href="'+events[i].url+'">link to event page</a>' + 
                                       '<small>'+events[i].description+'</small>'+'</li>';
                             

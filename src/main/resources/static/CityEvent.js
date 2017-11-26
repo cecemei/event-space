@@ -18,10 +18,10 @@
               this.database = firebase.database();
               this.storage = firebase.storage();
               // Initiates Firebase auth and listen to auth state changes.
-              this.auth.onAuthStateChanged(this.onAuthStateChanged.bind(this));
+              //this.auth.onAuthStateChanged(this.onAuthStateChanged.bind(this));
             };
 
-            CityEvent.prototype.checkSignedInWithMessage = function() {
+            CityEvent.prototype.checkSignedIn = function() {
                 // Return true if the user is signed in Firebase
                 if (this.auth.currentUser) {
                   return true;
@@ -44,19 +44,22 @@
                   // Sign in Firebase using popup auth and Google as the identity provider.
                       var provider = new firebase.auth.GoogleAuthProvider();
                       this.auth.signInWithRedirect(provider);
-                      return this.checkSignedInWithMessage();
+                      return this.checkSignedIn();
             };
 
             CityEvent.prototype.signOut = function(){
-                if(this.checkSignedInWithMessage()){
+                if(this.checkSignedIn()){
                     this.auth.signOut();
                 }
             };
 
-            CityEvent.prototype.guest = function(){
-                alert('guest');
+            CityEvent.prototype.checkCurrentUser = function(){
+                if(this.auth.currentUser)
+                    return this.auth.currentUser.displayName;
+                else
+                    return 'guest';
             };
-
+            /*
             CityEvent.prototype.onAuthStateChanged = function(user){
                 if(user){
                     this.signOutButton.removeAttribute('hidden');
@@ -67,5 +70,5 @@
 
                 }
 
-            };
+            };*/
             

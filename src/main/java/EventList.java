@@ -71,7 +71,7 @@ Event class
 		url = (String) event.get("event_url");
 		time = (Long) event.get("time");
 		long utc_offset = (Long) event.get("utc_offset");
-		date = new Date(time+utc_offset);
+		date = new Date(time);
 		SimpleDateFormat sdf = new SimpleDateFormat("EEEE,MMMM d,yyyy h:mm a");
 		formattedDate = sdf.format(date);
 		
