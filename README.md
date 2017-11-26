@@ -1,10 +1,10 @@
 # event space
 
-## Software Requirement##
+## Software Requirement
 Java 1.8
 Maven 3.5
 
-## How to start##
+## How to start
 * Run this in your terminal:
 ```sh
 git clone https://github.com/cecemei/event-space.git
