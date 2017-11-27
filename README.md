@@ -22,5 +22,8 @@ java -jar target/meet-up-open-events-0.1.1-SNAPSHOT.jar
 * [jQuery](https://developers.google.com/speed/libraries/)
 * MongoDB - TODO
 
+## Deploy
+* AWS EC2 - TODO
+
 ## Acknowledgments
-* [minitwit](https://github.com/pallets/flask/tree/master/examples/minitwit)
+* [minitwit](https://github.com/pallets/flask/tree/master/examples/minitwit) - inspired by its clean web interface
