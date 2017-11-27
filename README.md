@@ -12,7 +12,7 @@ cd event-space
 mvn clean install
 java -jar target/meet-up-open-events-0.1.1-SNAPSHOT.jar
 ```
-* Open <localhost:8080> in your browser
+* Open <http://localhost:8080> in your browser
 
 ## Built With
 * [Spring](https://projects.spring.io/spring-framework/) framework
