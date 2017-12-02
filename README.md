@@ -23,7 +23,8 @@ java -jar target/meet-up-open-events-0.1.1-SNAPSHOT.jar
 * MongoDB - TODO
 
 ## Deploy
-* AWS EC2 - TODO
+* [Heroku](https://devcenter.heroku.com/articles/getting-started-with-java#deploy-the-app)
+* open in web browser - https://event-space-2017.herokuapp.com
 
 ## Acknowledgments
 * [minitwit](https://github.com/pallets/flask/tree/master/examples/minitwit) - inspired by its clean web interface
